@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/mocaOS/cortex-registry/main/schema/listing.v1.json",
+  "title": "Cortex Registry Listing v1",
+  "type": "object",
+  "required": [
+    "app",
+    "artifact",
+    "repo",
+    "listedAt",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "app": {
+      "description": "The app's app.json manifest, verbatim (validated against app.v1.json)",
+      "$ref": "https://raw.githubusercontent.com/mocaOS/cortex-registry/main/schema/app.v1.json"
+    },
+    "artifact": {
+      "type": "object",
+      "required": [
+        "url",
+        "sha256",
+        "size"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern": "^https://",
+          "description": "Direct download URL of the release zip (GitHub release asset)"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 52428800
+        }
+      }
+    },
+    "repo": {
+      "type": "string",
+      "pattern": "^https://",
+      "description": "Source repository"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 32
+      },
+      "maxItems": 10
+    },
+    "screenshots": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 6
+    },
+    "listedAt": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "yanked"
+      ]
+    },
+    "yankedReason": {
+      "type": "string"
+    }
+  }
+}

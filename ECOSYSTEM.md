@@ -19,7 +19,15 @@
 > `headers`, upgrades preserve storage+tasks, template `platform.ts` client,
 > /builder/app/tasks.md DSL reference.
 > Remaining 2.5: features/branding endpoints, standalone llm endpoint.
-> Phase 3 not started.
+> PHASE 3 CORE BUILT 2026-07-20: registry repo (listing.v1 + app.v1 schemas,
+> seed listings for both released apps, CI that re-downloads artifacts and
+> re-verifies sha256 + manifest==zip, generated index.json catalog, README
+> submission/release contract) + the consumer in cortex-app (APP_REGISTRY_URL,
+> GET /api/admin/apps/registry joined w/ install state, sha256-verified
+> install-from-registry, admin "Browse Registry" panel). Both apps' GitHub
+> releases cut & verified. Remaining Phase 3: the public browse site
+> (Vercel/cortexskills aesthetic) — the raw index.json IS the API until then;
+> Demo 3 (install on a second instance) once the registry repo is pushed.
 > Scope: builder skills, app template, in-instance app hosting, app discovery.
 > Parked: x402 cortex directory aggregation, monetized listings, ratings.
 

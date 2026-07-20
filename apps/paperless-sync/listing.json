@@ -1,0 +1,68 @@
+{
+  "app": {
+    "id": "paperless-sync",
+    "name": "Paperless Sync",
+    "version": "0.3.1",
+    "type": "platform",
+    "description": "Sync your paperless-ngx document archive into the Cortex knowledge graph \u2014 on demand or on a schedule, fully server-side",
+    "publisher": {
+      "name": "reneil",
+      "url": "https://github.com/mocaOS"
+    },
+    "icon": "icon.svg",
+    "entry": "index.html",
+    "cortex": {
+      "minVersion": "2.0.0",
+      "keyScope": "read_write",
+      "endpoints": [
+        "upload",
+        "documents",
+        "collections"
+      ],
+      "collections": "all"
+    },
+    "config": [
+      {
+        "name": "PAPERLESS_BASE_URL",
+        "type": "text",
+        "required": true,
+        "description": "Base URL of your paperless-ngx instance, e.g. https://paperless.example.com"
+      },
+      {
+        "name": "PAPERLESS_TOKEN",
+        "type": "secret",
+        "required": true,
+        "auth_header": "Authorization: Token PAPERLESS_TOKEN",
+        "description": "paperless-ngx API token (My Profile -> API Token). Stored encrypted, injected server-side."
+      }
+    ],
+    "sharing": {
+      "links": false
+    },
+    "users": false,
+    "capabilities": {
+      "http": {
+        "hosts": [
+          "${PAPERLESS_BASE_URL}"
+        ]
+      },
+      "tasks": {},
+      "storage": {}
+    }
+  },
+  "artifact": {
+    "url": "https://github.com/mocaOS/cortex-app-paperless/releases/download/v0.3.1/paperless-sync-0.3.1.zip",
+    "sha256": "602af598435f2a17bcbf41b9f5c419b29df3fbdc44e1af4dfd8d7e4aaa88e934",
+    "size": 72838
+  },
+  "repo": "https://github.com/mocaOS/cortex-app-paperless",
+  "tags": [
+    "documents",
+    "paperless-ngx",
+    "sync",
+    "scheduled"
+  ],
+  "screenshots": [],
+  "listedAt": "2026-07-20",
+  "status": "active"
+}

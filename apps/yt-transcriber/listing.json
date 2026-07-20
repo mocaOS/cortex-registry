@@ -1,0 +1,66 @@
+{
+  "app": {
+    "id": "yt-transcriber",
+    "name": "YT Transcriber",
+    "version": "0.1.4",
+    "type": "platform",
+    "description": "Turn YouTube videos and whole channels into clean transcripts inside your knowledge graph",
+    "publisher": {
+      "name": "reneil",
+      "url": "https://github.com/mocaOS"
+    },
+    "icon": "icon.svg",
+    "entry": "index.html",
+    "cortex": {
+      "minVersion": "2.0.0",
+      "keyScope": "read_write",
+      "endpoints": [
+        "upload",
+        "graph/entities",
+        "collections"
+      ],
+      "collections": "all"
+    },
+    "config": [
+      {
+        "name": "VENICE_API_KEY",
+        "type": "secret",
+        "required": true,
+        "auth_header": "Authorization: Bearer VENICE_API_KEY",
+        "auth_host": "api.venice.ai",
+        "description": "Venice AI API key used for video transcription (venice.ai -> Settings -> API keys)"
+      }
+    ],
+    "externalHosts": [],
+    "sharing": {
+      "links": true
+    },
+    "users": false,
+    "capabilities": {
+      "http": {
+        "hosts": [
+          "www.youtube.com",
+          "api.venice.ai"
+        ]
+      },
+      "tasks": {},
+      "storage": {},
+      "llm": {}
+    }
+  },
+  "artifact": {
+    "url": "https://github.com/mocaOS/cortex-app-youtube-transcriber/releases/download/v0.1.4/yt-transcriber-0.1.4.zip",
+    "sha256": "018386f8aa5b291a08528c00582eb088ef51630da898b14b12516a0096ca58a8",
+    "size": 76234
+  },
+  "repo": "https://github.com/mocaOS/cortex-app-youtube-transcriber",
+  "tags": [
+    "youtube",
+    "transcription",
+    "venice",
+    "llm"
+  ],
+  "screenshots": [],
+  "listedAt": "2026-07-20",
+  "status": "active"
+}

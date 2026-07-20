@@ -1,0 +1,21 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Full check: listing shape + manifest rules + artifact download with
+      # sha256 re-verification + zip-embedded manifest == listing.
+      - name: Validate listings (downloads & re-verifies artifacts)
+        run: node scripts/validate-listings.mjs
+      - name: Check index.json is current
+        run: node scripts/build-index.mjs --check
