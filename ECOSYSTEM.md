@@ -3,9 +3,18 @@
 > Status: v1 IN EXECUTION (2026-07-20). Phase 1 done (template proven, /builder
 > skills hardened via Demo 1). Phase 2 done and live-verified (hosting core,
 > sandboxed serving, tokens, share links, SSE proxy, admin UI + launcher).
-> Phase 2.5 partially pulled forward: `http` + config-read capabilities shipped
-> (reference app: cortex-paperless); tasks/storage/llm remain. Phase 3 not
-> started. Nothing committed yet — all working-tree.
+> Phase 2.5 CORE DONE: `http`, config-read, `storage` (per-app SQLite KV),
+> `tasks` (declarative step-queue engine w/ schedules, boot resume, llm
+> chunk/validate policies), and `llm` (task-step completions, metered) are
+> implemented in cortex-app with both §5.2 acceptance shapes covered by
+> engine tests (paperless-style scheduled sync + yt-transcriber-style batch).
+> LIVE-VERIFIED 2026-07-20: cortex-app-paperless v0.3.0 converted to a
+> platform task (client sync loop deleted) — 342 real paperless docs synced
+> server-side in ~26s, idempotent re-run, cursor + storage dedup working.
+> Remaining 2.5: features/branding endpoints, standalone llm endpoint, the
+> real yt-transcriber port app, template client helpers for tasks/storage
+> (paperless app's src/lib/platform.ts is the donor).
+> Phase 3 not started.
 > Scope: builder skills, app template, in-instance app hosting, app discovery.
 > Parked: x402 cortex directory aggregation, monetized listings, ratings.
 
@@ -231,13 +240,21 @@ POST platform/tasks
   "concurrency": 3 }
 ```
 
-Step vocabulary v1: `http` (secret-injected, host-allowlisted), `llm`
-(prompt template + built-in validation policies: length-ratio, word-overlap,
-retry-once-else-keep-original — yt-transcriber's chunk-safety rules become
-platform policies), `store`. Control: `GET/PATCH platform/tasks/{id}`
-(status/progress/pause/resume/cancel/retry-failed). Complex orchestration
-logic (chunking, branching) runs client-side when composing the item list;
-the *execution* is what needs to survive a closed tab, and it does.
+Step vocabulary v1 (LOCKED 2026-07-20, implemented in cortex-app
+`app_task_dsl.py`/`app_task_service.py`): `http` (secret-injected,
+host-allowlisted, + `paginate` w/ `keyBy` for joins), `cortex` (endpoint-
+allowlisted API calls incl. multipart-from-text uploads), `llm` (prompt
+template + built-in chunking & validation policies: length-ratio,
+word-overlap, retry-once-else-keep-original — yt-transcriber's chunk-safety
+rules became platform policies), `store` (get/put/delete/list on the app's
+storage), `template` (text or conditional lines), `skipItem`. Definitions
+gained `setup`/`finally` sections, fan-out `items.from` with `skipIfStored`
+dedup, and `schedule.everyMinutes` — a scheduled task IS the headless cron
+sync. Control: `GET/PATCH platform/tasks/{id}`
+(pause/resume/cancel/retryFailed/runNow); boot resume + per-minute
+scheduler. Complex orchestration logic beyond this runs client-side when
+composing the item list; the *execution* is what needs to survive a closed
+tab, and it does.
 
 If the DSL can't express it → the app is Class C. That line keeps Class B
 secure and the backend free of embedded runtimes.
@@ -413,11 +430,15 @@ Dependencies: 2 needs 1's frozen contracts; 2.5 needs 2's proxy/token core;
 
 **Open (needed before the phase that consumes them):**
 - Naming: "Apps"? launcher placement in nav? (Phase 2 UI)
-- Default per-app llm quota + storage quota values. (Phase 2.5)
+- ~~Default per-app llm quota + storage quota values~~ — DECIDED 2026-07-20:
+  storage 50 MB/app + 1 MB/value; llm 500 calls/run; items 2000/task;
+  concurrency 4/task + 8 global; schedule floor 15 min (all env-tunable,
+  `APP_*` in cortex-app environment.md).
+- ~~Task-step DSL v1 final vocabulary~~ — LOCKED 2026-07-20 (see §5.2);
+  designed against both real job shapes, engine-tested; the live
+  yt-transcriber port app remains as the end-to-end demo.
 - Registry domain (registry.cortex.eco?) + whether cortexskills.org
   cross-links. (Phase 3)
-- Task-step DSL v1 final vocabulary — lock during yt-transcriber port design,
-  the port is the acceptance test. (Phase 2.5)
 
 ## 12. Risks
 
