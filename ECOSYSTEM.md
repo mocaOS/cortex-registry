@@ -25,9 +25,11 @@
 > submission/release contract) + the consumer in cortex-app (APP_REGISTRY_URL,
 > GET /api/admin/apps/registry joined w/ install state, sha256-verified
 > install-from-registry, admin "Browse Registry" panel). Both apps' GitHub
-> releases cut & verified. Remaining Phase 3: the public browse site
-> (Vercel/cortexskills aesthetic) — the raw index.json IS the API until then;
-> Demo 3 (install on a second instance) once the registry repo is pushed.
+> releases cut & verified. Browse site BUILT (site/: Next.js, cortexskills
+> aesthetic, search/filters, JSON API /api/apps[?q,type] + /api/apps/{slug};
+> reads local index.json, falls back to raw GitHub when deployed detached).
+> Remaining Phase 3: deploy the site (domain undecided — registry.cortex.eco?);
+> Demo 3 (install-from-registry on an instance) once this repo is pushed.
 > Scope: builder skills, app template, in-instance app hosting, app discovery.
 > Parked: x402 cortex directory aggregation, monetized listings, ratings.
 

@@ -17,6 +17,7 @@ schema/app.v1.json        the app manifest contract (canonical copy)
 schema/listing.v1.json    the listing contract
 apps/{slug}/listing.json  one listing per app (slug == app.json id)
 index.json                generated catalog (scripts/build-index.mjs)
+site/                     the browse site + JSON API (Next.js; renders index.json)
 ECOSYSTEM.md              the master plan for the whole app ecosystem
 ```
 
