@@ -11,9 +11,14 @@
 > LIVE-VERIFIED 2026-07-20: cortex-app-paperless v0.3.0 converted to a
 > platform task (client sync loop deleted) — 342 real paperless docs synced
 > server-side in ~26s, idempotent re-run, cursor + storage dedup working.
-> Remaining 2.5: features/branding endpoints, standalone llm endpoint, the
-> real yt-transcriber port app, template client helpers for tasks/storage
-> (paperless app's src/lib/platform.ts is the donor).
+> DEMO 2 BUILT same day: cortex-app-youtube-transcriber (Class-B port per §8) —
+> channel scraping via proxied http (EU consent cookie), transcribe/refine/
+> upload as three tasks, refine + upload live-verified against the instance
+> LLM; only Venice-key transcription awaits admin config. Shipped alongside:
+> `auth_host` per-credential host scoping (multi-host apps), http envelope
+> `headers`, upgrades preserve storage+tasks, template `platform.ts` client,
+> /builder/app/tasks.md DSL reference.
+> Remaining 2.5: features/branding endpoints, standalone llm endpoint.
 > Phase 3 not started.
 > Scope: builder skills, app template, in-instance app hosting, app discovery.
 > Parked: x402 cortex directory aggregation, monetized listings, ratings.
