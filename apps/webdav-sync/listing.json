@@ -1,0 +1,75 @@
+{
+  "app": {
+    "id": "webdav-sync",
+    "name": "WebDAV Sync",
+    "version": "0.1.0",
+    "type": "platform",
+    "description": "Sync folders from any WebDAV server into the Cortex knowledge graph — Koofr, Hetzner Storage Share, ownCloud, and more — on demand or on a schedule, fully server-side",
+    "publisher": {
+      "name": "reneil",
+      "url": "https://github.com/mocaOS"
+    },
+    "icon": "icon.svg",
+    "entry": "index.html",
+    "cortex": {
+      "minVersion": "2.1.0",
+      "keyScope": "read_write",
+      "endpoints": [
+        "upload",
+        "documents",
+        "collections"
+      ],
+      "collections": "all"
+    },
+    "config": [
+      {
+        "name": "WEBDAV_URL",
+        "type": "text",
+        "required": true,
+        "description": "Full WebDAV collection URL including any base path, e.g. https://dav.example.com/remote.php/webdav or https://app.koofr.net/dav/Koofr (no trailing slash)"
+      },
+      {
+        "name": "WEBDAV_USERNAME",
+        "type": "text",
+        "required": true,
+        "description": "WebDAV username (many providers use app-specific credentials - check your provider's WebDAV/app-password settings)"
+      },
+      {
+        "name": "WEBDAV_PASSWORD",
+        "type": "secret",
+        "required": true,
+        "auth_header": "Authorization: Basic base64(WEBDAV_USERNAME:WEBDAV_PASSWORD)",
+        "description": "WebDAV password or app password, pasted as-is. Basic auth is assembled and base64-encoded server-side. Stored encrypted."
+      }
+    ],
+    "sharing": {
+      "links": false
+    },
+    "users": false,
+    "capabilities": {
+      "http": {
+        "hosts": [
+          "${WEBDAV_URL}"
+        ]
+      },
+      "tasks": {},
+      "storage": {}
+    }
+  },
+  "artifact": {
+    "url": "https://github.com/mocaOS/cortex-app-webdav/releases/download/v0.1.0/webdav-sync-0.1.0.zip",
+    "sha256": "90f39258a9f7c116eac7adba585d74a92514759dbaf4f3298f12412bb1ba80eb",
+    "size": 75472
+  },
+  "repo": "https://github.com/mocaOS/cortex-app-webdav",
+  "tags": [
+    "sync",
+    "webdav",
+    "koofr",
+    "hetzner",
+    "documents"
+  ],
+  "screenshots": [],
+  "listedAt": "2026-07-21",
+  "status": "active"
+}

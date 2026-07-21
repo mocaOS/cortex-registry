@@ -69,6 +69,75 @@
       "status": "active"
     },
     {
+      "slug": "gdrive-sync",
+      "app": {
+        "id": "gdrive-sync",
+        "name": "Google Drive Sync",
+        "version": "0.1.0",
+        "type": "platform",
+        "description": "Sync Google Drive folders into the Cortex knowledge graph — share folders with a service account, no OAuth consent screens, on demand or on a schedule, fully server-side",
+        "publisher": {
+          "name": "reneil",
+          "url": "https://github.com/mocaOS"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.1.0",
+          "keyScope": "read_write",
+          "endpoints": [
+            "upload",
+            "documents",
+            "collections"
+          ],
+          "collections": "all"
+        },
+        "config": [
+          {
+            "name": "GDRIVE_SA_KEY",
+            "type": "secret",
+            "required": true,
+            "auth_header": "Authorization: Bearer google_sa_token(GDRIVE_SA_KEY, https://www.googleapis.com/auth/drive.readonly)",
+            "description": "Paste the ENTIRE JSON key file, unmodified — from the opening { to the closing }, including the private_key with its \\n sequences (Google Cloud Console -> IAM -> Service Accounts -> Keys -> Add key -> JSON). Cortex parses what it needs and mints short-lived tokens server-side; the key is stored encrypted and never leaves the instance."
+          },
+          {
+            "name": "GDRIVE_SA_EMAIL",
+            "type": "text",
+            "required": true,
+            "description": "The service account's email (client_email in the JSON key, e.g. cortex-sync@myproject.iam.gserviceaccount.com) - shown to users so they know which address to share folders with"
+          }
+        ],
+        "sharing": {
+          "links": false
+        },
+        "users": false,
+        "capabilities": {
+          "http": {
+            "hosts": [
+              "www.googleapis.com"
+            ]
+          },
+          "tasks": {},
+          "storage": {}
+        }
+      },
+      "artifact": {
+        "url": "https://github.com/mocaOS/cortex-app-gdrive/releases/download/v0.1.0/gdrive-sync-0.1.0.zip",
+        "sha256": "70495a0462751a3eee58e67ebabc7c32f413cc85bd40e4250ca7a31d9b813387",
+        "size": 75815
+      },
+      "repo": "https://github.com/mocaOS/cortex-app-gdrive",
+      "tags": [
+        "sync",
+        "google-drive",
+        "service-account",
+        "documents"
+      ],
+      "screenshots": [],
+      "listedAt": "2026-07-21",
+      "status": "active"
+    },
+    {
       "slug": "nextcloud-sync",
       "app": {
         "id": "nextcloud-sync",
@@ -144,6 +213,72 @@
       "status": "active"
     },
     {
+      "slug": "onedrive-sync",
+      "app": {
+        "id": "onedrive-sync",
+        "name": "OneDrive Sync",
+        "version": "0.1.0",
+        "type": "platform",
+        "description": "Sync selected OneDrive folders into the Cortex knowledge graph — on demand or on a schedule, fully server-side via Microsoft Graph delta",
+        "publisher": {
+          "name": "reneil",
+          "url": "https://github.com/mocaOS"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.1.0",
+          "keyScope": "read_write",
+          "endpoints": [
+            "upload",
+            "documents",
+            "collections"
+          ],
+          "collections": "all"
+        },
+        "config": [
+          {
+            "name": "ENTRA_CLIENT_ID",
+            "type": "text",
+            "required": true,
+            "description": "Application (client) ID of a Microsoft Entra app registration (free at entra.microsoft.com). Supported account types must include personal Microsoft accounts, and 'Allow public client flows' must be enabled - device-code flow, no client secret needed anywhere."
+          }
+        ],
+        "externalHosts": [
+          "https://graph.microsoft.com"
+        ],
+        "sharing": {
+          "links": false
+        },
+        "users": false,
+        "capabilities": {
+          "http": {
+            "hosts": [
+              "login.microsoftonline.com",
+              "graph.microsoft.com"
+            ]
+          },
+          "tasks": {},
+          "storage": {}
+        }
+      },
+      "artifact": {
+        "url": "https://github.com/mocaOS/cortex-app-onedrive/releases/download/v0.1.0/onedrive-sync-0.1.0.zip",
+        "sha256": "db13a6140dadc7512dd77a3f3d1c49d4f4ba7e0d212781aab7f6fabc6ddbd457",
+        "size": 76928
+      },
+      "repo": "https://github.com/mocaOS/cortex-app-onedrive",
+      "tags": [
+        "sync",
+        "onedrive",
+        "microsoft",
+        "documents"
+      ],
+      "screenshots": [],
+      "listedAt": "2026-07-21",
+      "status": "active"
+    },
+    {
       "slug": "paperless-sync",
       "app": {
         "id": "paperless-sync",
@@ -207,6 +342,82 @@
         "paperless-ngx",
         "sync",
         "scheduled"
+      ],
+      "screenshots": [],
+      "listedAt": "2026-07-21",
+      "status": "active"
+    },
+    {
+      "slug": "webdav-sync",
+      "app": {
+        "id": "webdav-sync",
+        "name": "WebDAV Sync",
+        "version": "0.1.0",
+        "type": "platform",
+        "description": "Sync folders from any WebDAV server into the Cortex knowledge graph — Koofr, Hetzner Storage Share, ownCloud, and more — on demand or on a schedule, fully server-side",
+        "publisher": {
+          "name": "reneil",
+          "url": "https://github.com/mocaOS"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.1.0",
+          "keyScope": "read_write",
+          "endpoints": [
+            "upload",
+            "documents",
+            "collections"
+          ],
+          "collections": "all"
+        },
+        "config": [
+          {
+            "name": "WEBDAV_URL",
+            "type": "text",
+            "required": true,
+            "description": "Full WebDAV collection URL including any base path, e.g. https://dav.example.com/remote.php/webdav or https://app.koofr.net/dav/Koofr (no trailing slash)"
+          },
+          {
+            "name": "WEBDAV_USERNAME",
+            "type": "text",
+            "required": true,
+            "description": "WebDAV username (many providers use app-specific credentials - check your provider's WebDAV/app-password settings)"
+          },
+          {
+            "name": "WEBDAV_PASSWORD",
+            "type": "secret",
+            "required": true,
+            "auth_header": "Authorization: Basic base64(WEBDAV_USERNAME:WEBDAV_PASSWORD)",
+            "description": "WebDAV password or app password, pasted as-is. Basic auth is assembled and base64-encoded server-side. Stored encrypted."
+          }
+        ],
+        "sharing": {
+          "links": false
+        },
+        "users": false,
+        "capabilities": {
+          "http": {
+            "hosts": [
+              "${WEBDAV_URL}"
+            ]
+          },
+          "tasks": {},
+          "storage": {}
+        }
+      },
+      "artifact": {
+        "url": "https://github.com/mocaOS/cortex-app-webdav/releases/download/v0.1.0/webdav-sync-0.1.0.zip",
+        "sha256": "90f39258a9f7c116eac7adba585d74a92514759dbaf4f3298f12412bb1ba80eb",
+        "size": 75472
+      },
+      "repo": "https://github.com/mocaOS/cortex-app-webdav",
+      "tags": [
+        "sync",
+        "webdav",
+        "koofr",
+        "hetzner",
+        "documents"
       ],
       "screenshots": [],
       "listedAt": "2026-07-21",
