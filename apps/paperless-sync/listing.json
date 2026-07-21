@@ -2,9 +2,9 @@
   "app": {
     "id": "paperless-sync",
     "name": "Paperless Sync",
-    "version": "0.3.1",
+    "version": "0.4.0",
     "type": "platform",
-    "description": "Sync your paperless-ngx document archive into the Cortex knowledge graph — on demand or on a schedule, fully server-side",
+    "description": "Sync your paperless-ngx document archive into the Cortex knowledge graph — the full original documents, on demand or on a schedule, fully server-side",
     "publisher": {
       "name": "reneil",
       "url": "https://github.com/mocaOS"
@@ -12,7 +12,7 @@
     "icon": "icon.svg",
     "entry": "index.html",
     "cortex": {
-      "minVersion": "2.0.0",
+      "minVersion": "2.1.0",
       "keyScope": "read_write",
       "endpoints": [
         "upload",
@@ -51,9 +51,9 @@
     }
   },
   "artifact": {
-    "url": "https://github.com/mocaOS/cortex-app-paperless/releases/download/v0.3.1/paperless-sync-0.3.1.zip",
-    "sha256": "602af598435f2a17bcbf41b9f5c419b29df3fbdc44e1af4dfd8d7e4aaa88e934",
-    "size": 72838
+    "url": "https://github.com/mocaOS/cortex-app-paperless/releases/download/v0.4.0/paperless-sync-0.4.0.zip",
+    "sha256": "b7964ad2e930c8bb819733f452c62c013611816d36affe0066a05e2f6534d327",
+    "size": 72593
   },
   "repo": "https://github.com/mocaOS/cortex-app-paperless",
   "tags": [
@@ -63,6 +63,6 @@
     "scheduled"
   ],
   "screenshots": [],
-  "listedAt": "2026-07-20",
+  "listedAt": "2026-07-21",
   "status": "active"
 }
