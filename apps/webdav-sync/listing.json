@@ -2,9 +2,9 @@
   "app": {
     "id": "webdav-sync",
     "name": "WebDAV Sync",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "type": "platform",
-    "description": "Sync folders from any WebDAV server into the Cortex knowledge graph — Koofr, Hetzner Storage Share, ownCloud, and more — on demand or on a schedule, fully server-side",
+    "description": "Sync folders from any WebDAV server into the Cortex knowledge graph — Nextcloud, Synology, Koofr, pCloud, GMX/WEB.DE, MagentaCLOUD, HiDrive & more — on demand or scheduled, fully server-side",
     "publisher": {
       "name": "reneil",
       "url": "https://github.com/mocaOS"
@@ -57,17 +57,32 @@
     }
   },
   "artifact": {
-    "url": "https://github.com/mocaOS/cortex-app-webdav/releases/download/v0.1.0/webdav-sync-0.1.0.zip",
-    "sha256": "90f39258a9f7c116eac7adba585d74a92514759dbaf4f3298f12412bb1ba80eb",
-    "size": 75472
+    "url": "https://github.com/mocaOS/cortex-app-webdav/releases/download/v0.1.1/webdav-sync-0.1.1.zip",
+    "sha256": "999782b55b45e8dfad5a88e59e71625a3814503fb04cabf4a777497b6307bfa6",
+    "size": 76168
   },
   "repo": "https://github.com/mocaOS/cortex-app-webdav",
   "tags": [
     "sync",
     "webdav",
+    "documents",
+    "nextcloud",
+    "owncloud",
+    "synology",
+    "qnap",
+    "nas",
     "koofr",
+    "pcloud",
+    "yandex-disk",
+    "gmx",
+    "web-de",
+    "magentacloud",
+    "hidrive",
+    "kdrive",
+    "fastmail",
+    "seafile",
     "hetzner",
-    "documents"
+    "rclone"
   ],
   "screenshots": [],
   "listedAt": "2026-07-21",

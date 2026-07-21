@@ -52,7 +52,7 @@
         "type": "string",
         "maxLength": 32
       },
-      "maxItems": 10
+      "maxItems": 24
     },
     "screenshots": {
       "type": "array",
