@@ -1,0 +1,513 @@
+{
+  "$comment": "Cross-validator conformance corpus — the shared floor of manifest rules. Consumed by cortex-registry (scripts/conformance.mjs), cortex-app-template (scripts/conformance.mjs), and cortex-app (tests/test_manifest_conformance.py). A rule change that reaches only one implementation fails the others' CI. Only include rules ALL THREE enforce; 'mention' is a substring that must appear (case-insensitive) in every implementation's error output.",
+  "version": 1,
+  "cases": [
+    {
+      "name": "valid-static-minimal",
+      "valid": true,
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "static",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "search",
+            "ask"
+          ],
+          "collections": "all"
+        },
+        "config": [],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "valid-platform-full",
+      "valid": true,
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "platform",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read_write",
+          "endpoints": [
+            "upload",
+            "documents",
+            "graph/entities"
+          ],
+          "collections": "all"
+        },
+        "config": [
+          {
+            "name": "SERVICE_BASE_URL",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "SERVICE_TOKEN",
+            "type": "secret",
+            "auth_header": "Authorization: Token SERVICE_TOKEN",
+            "auth_host": "${SERVICE_BASE_URL}"
+          }
+        ],
+        "externalHosts": [],
+        "sharing": {
+          "links": true
+        },
+        "capabilities": {
+          "http": {
+            "hosts": [
+              "${SERVICE_BASE_URL}",
+              "api.example.com"
+            ]
+          },
+          "tasks": {},
+          "storage": {},
+          "llm": {}
+        }
+      }
+    },
+    {
+      "name": "invalid-id-not-slug",
+      "valid": false,
+      "mention": "slug",
+      "manifest": {
+        "id": "Not_A_Slug",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "static",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "search",
+            "ask"
+          ],
+          "collections": "all"
+        },
+        "config": [],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "invalid-version-not-semver",
+      "valid": false,
+      "mention": "semver",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0",
+        "type": "static",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "search",
+            "ask"
+          ],
+          "collections": "all"
+        },
+        "config": [],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "invalid-missing-description",
+      "valid": false,
+      "mention": "description",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "static",
+        "description": "",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "search",
+            "ask"
+          ],
+          "collections": "all"
+        },
+        "config": [],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "invalid-missing-publisher",
+      "valid": false,
+      "mention": "publisher.name",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "static",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {},
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "search",
+            "ask"
+          ],
+          "collections": "all"
+        },
+        "config": [],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "invalid-type",
+      "valid": false,
+      "mention": "static",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "plugin",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "search",
+            "ask"
+          ],
+          "collections": "all"
+        },
+        "config": [],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "invalid-keyscope",
+      "valid": false,
+      "mention": "keyScope",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "static",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "admin",
+          "endpoints": [
+            "search"
+          ],
+          "collections": "all"
+        },
+        "config": [],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "invalid-absolute-endpoint",
+      "valid": false,
+      "mention": "endpoints",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "static",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "/search"
+          ],
+          "collections": "all"
+        },
+        "config": [],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "invalid-empty-endpoints",
+      "valid": false,
+      "mention": "endpoints",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "static",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [],
+          "collections": "all"
+        },
+        "config": [],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "invalid-config-name-case",
+      "valid": false,
+      "mention": "UPPER_SNAKE",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "static",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "search",
+            "ask"
+          ],
+          "collections": "all"
+        },
+        "config": [
+          {
+            "name": "lower_case",
+            "type": "text"
+          }
+        ],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "invalid-config-type",
+      "valid": false,
+      "mention": "secret",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "static",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "search",
+            "ask"
+          ],
+          "collections": "all"
+        },
+        "config": [
+          {
+            "name": "MY_VAR",
+            "type": "password"
+          }
+        ],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "invalid-empty-auth-host",
+      "valid": false,
+      "mention": "auth_host",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "static",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "search",
+            "ask"
+          ],
+          "collections": "all"
+        },
+        "config": [
+          {
+            "name": "MY_TOKEN",
+            "type": "secret",
+            "auth_header": "Authorization: Bearer MY_TOKEN",
+            "auth_host": "  "
+          }
+        ],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        }
+      }
+    },
+    {
+      "name": "invalid-capabilities-on-static",
+      "valid": false,
+      "mention": "capabilities",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "static",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "search",
+            "ask"
+          ],
+          "collections": "all"
+        },
+        "config": [],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        },
+        "capabilities": {
+          "http": {
+            "hosts": [
+              "api.example.com"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "invalid-http-without-hosts",
+      "valid": false,
+      "mention": "hosts",
+      "manifest": {
+        "id": "conformance-app",
+        "name": "Conformance App",
+        "version": "1.0.0",
+        "type": "platform",
+        "description": "A fixture for cross-validator conformance",
+        "publisher": {
+          "name": "corpus"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.0.0",
+          "keyScope": "read",
+          "endpoints": [
+            "search",
+            "ask"
+          ],
+          "collections": "all"
+        },
+        "config": [],
+        "externalHosts": [],
+        "sharing": {
+          "links": false
+        },
+        "capabilities": {
+          "http": {}
+        }
+      }
+    }
+  ]
+}

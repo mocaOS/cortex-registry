@@ -36,7 +36,19 @@ your coding agent at [cortexskills.org/builder/app](https://cortexskills.org/bui
    curl -sL <asset url> | sha256sum     # verify published == built
    ```
 
-2. **Open a PR** adding `apps/{your-id}/listing.json`:
+2. **Generate the listing** (in a checkout of this repo):
+
+   ```bash
+   node scripts/add-listing.mjs <release zip url> --tags docs,sync
+   # downloads the artifact, extracts the manifest, pins sha256 + size,
+   # writes apps/{id}/listing.json and rebuilds index.json
+   ```
+
+   (Apps built from the template release with `git tag v{version} &&
+   git push --tags` — the shipped workflow builds, validates, and attaches
+   the zip automatically.)
+
+   Or write the listing by hand — `apps/{your-id}/listing.json`:
 
    ```jsonc
    {
@@ -56,7 +68,7 @@ your coding agent at [cortexskills.org/builder/app](https://cortexskills.org/bui
 
    Then regenerate the catalog: `node scripts/build-index.mjs`.
 
-3. **CI is the floor, review is the gate.** The workflow re-downloads your
+3. **Open a PR.** CI is the floor, review is the gate ([REVIEWING.md](REVIEWING.md)). The workflow re-downloads your
    artifact, re-verifies the sha256 and size, checks the zip's embedded
    `app.json` equals your listing's manifest, and validates both schemas.
    A human reviews what the app declares (key scope, endpoints, external
@@ -75,7 +87,21 @@ digest is the trust anchor.
 node scripts/validate-listings.mjs            # full check incl. artifact download
 node scripts/validate-listings.mjs --offline  # shape/manifest checks only
 node scripts/build-index.mjs --check          # is index.json current?
+node scripts/conformance.mjs                  # manifest rules vs the shared corpus
 ```
+
+CI runs all of this on every PR **and on a weekly schedule** — so a deleted
+or replaced release asset surfaces here, not at someone's install.
+
+### The conformance corpus
+
+`conformance/manifests.json` is the shared floor of manifest rules, enforced
+by three independent implementations: this repo's validator, the app
+template's `validate.mjs`, and cortex-app's server-side `validate_manifest`.
+Each repo's CI runs its own consumer against the corpus — a rule change that
+reaches only one implementation fails the other two. Changing a manifest
+rule therefore means: update all three implementations **and** add a corpus
+case here.
 
 ## Trust model
 

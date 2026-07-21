@@ -18,7 +18,7 @@ import { createHash } from "node:crypto";
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { inflateRawSync } from "node:zlib";
+import { manifestIssues, readZipEntries, sortKeys } from "./lib.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const offline = process.argv.includes("--offline");
@@ -26,40 +26,8 @@ const issues = [];
 const ok = (msg) => console.log(`  ✓ ${msg}`);
 const bad = (slug, msg) => issues.push(`${slug}: ${msg}`);
 
-const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-const SEMVER_RE = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-[0-9A-Za-z.-]+)?$/;
 const SHA256_RE = /^[a-f0-9]{64}$/;
 const MAX_SIZE = 50 * 1024 * 1024;
-
-function validateManifest(slug, app) {
-  if (typeof app !== "object" || app === null) return bad(slug, "app must be the manifest object");
-  if (!SLUG_RE.test(app.id ?? "")) bad(slug, `app.id must be a kebab slug (got ${JSON.stringify(app.id)})`);
-  if (app.id !== slug) bad(slug, `directory name must equal app.id (${app.id})`);
-  if (!SEMVER_RE.test(app.version ?? "")) bad(slug, "app.version must be semver");
-  if (!["static", "platform", "service"].includes(app.type)) bad(slug, "app.type must be static|platform|service");
-  if (typeof app.name !== "string" || app.name.length < 1 || app.name.length > 80) bad(slug, "app.name required (1-80)");
-  if (typeof app.description !== "string" || app.description.length < 1 || app.description.length > 200) bad(slug, "app.description required (1-200)");
-  if (typeof app.publisher?.name !== "string" || !app.publisher.name) bad(slug, "app.publisher.name required");
-  const cortex = app.cortex;
-  if (typeof cortex !== "object" || cortex === null) return bad(slug, "app.cortex block required");
-  if (!["read", "read_write"].includes(cortex.keyScope)) bad(slug, "cortex.keyScope must be read|read_write");
-  if (!Array.isArray(cortex.endpoints) || cortex.endpoints.length === 0 ||
-      !cortex.endpoints.every((e) => typeof e === "string" && e && !e.startsWith("/"))) {
-    bad(slug, "cortex.endpoints must be a non-empty list of /api/-relative paths");
-  }
-  for (const v of app.config ?? []) {
-    if (!/^[A-Z][A-Z0-9_]*$/.test(v?.name ?? "")) bad(slug, `config var ${JSON.stringify(v?.name)} must be UPPER_SNAKE`);
-    if (!["text", "secret"].includes(v?.type)) bad(slug, `config var ${v?.name}: type must be text|secret`);
-    if (v?.auth_host !== undefined && (typeof v.auth_host !== "string" || !v.auth_host.trim())) {
-      bad(slug, `config var ${v?.name}: auth_host must be a hostname or \${CONFIG_VAR} ref`);
-    }
-  }
-  const caps = app.capabilities ?? {};
-  if (Object.keys(caps).length && app.type !== "platform") bad(slug, "capabilities only valid for type platform");
-  if (caps.http && (!Array.isArray(caps.http.hosts) || caps.http.hosts.length === 0)) {
-    bad(slug, "capabilities.http.hosts must be a non-empty list");
-  }
-}
 
 function validateListingShape(slug, listing) {
   const known = new Set(["app", "artifact", "repo", "tags", "screenshots", "listedAt", "status", "yankedReason"]);
@@ -78,41 +46,6 @@ function validateListingShape(slug, listing) {
   if (typeof listing.repo !== "string" || !listing.repo.startsWith("https://")) bad(slug, "repo must be an https URL");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(listing.listedAt ?? "")) bad(slug, "listedAt must be YYYY-MM-DD");
   if (!["active", "yanked"].includes(listing.status)) bad(slug, "status must be active|yanked");
-}
-
-/** Minimal zip reader: central directory → {name: bytes} for the files we need. */
-function readZipEntries(buffer, wanted) {
-  const entries = {};
-  // find End Of Central Directory
-  let eocd = -1;
-  for (let i = buffer.length - 22; i >= 0; i--) {
-    if (buffer.readUInt32LE(i) === 0x06054b50) { eocd = i; break; }
-  }
-  if (eocd === -1) throw new Error("not a zip (no EOCD)");
-  const count = buffer.readUInt16LE(eocd + 10);
-  let offset = buffer.readUInt32LE(eocd + 16);
-  const names = [];
-  for (let i = 0; i < count; i++) {
-    if (buffer.readUInt32LE(offset) !== 0x02014b50) throw new Error("bad central directory");
-    const compression = buffer.readUInt16LE(offset + 10);
-    const compressedSize = buffer.readUInt32LE(offset + 20);
-    const nameLength = buffer.readUInt16LE(offset + 28);
-    const extraLength = buffer.readUInt16LE(offset + 30);
-    const commentLength = buffer.readUInt16LE(offset + 32);
-    const localOffset = buffer.readUInt32LE(offset + 42);
-    const name = buffer.subarray(offset + 46, offset + 46 + nameLength).toString();
-    names.push(name);
-    if (wanted.includes(name)) {
-      const localNameLength = buffer.readUInt16LE(localOffset + 26);
-      const localExtraLength = buffer.readUInt16LE(localOffset + 28);
-      const dataStart = localOffset + 30 + localNameLength + localExtraLength;
-      const data = buffer.subarray(dataStart, dataStart + compressedSize);
-      entries[name] = compression === 0 ? data : inflateRawSync(data);
-    }
-    offset += 46 + nameLength + extraLength + commentLength;
-  }
-  entries.__names = names;
-  return entries;
 }
 
 async function verifyArtifact(slug, listing) {
@@ -145,14 +78,6 @@ async function verifyArtifact(slug, listing) {
   }
 }
 
-function sortKeys(value) {
-  if (Array.isArray(value)) return value.map(sortKeys);
-  if (value && typeof value === "object") {
-    return Object.fromEntries(Object.keys(value).sort().map((k) => [k, sortKeys(value[k])]));
-  }
-  return value;
-}
-
 const appsDir = join(root, "apps");
 const slugs = existsSync(appsDir)
   ? readdirSync(appsDir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name)
@@ -174,7 +99,7 @@ for (const slug of slugs) {
   }
   const before = issues.length;
   validateListingShape(slug, listing);
-  validateManifest(slug, listing.app ?? {});
+  for (const issue of manifestIssues(listing.app ?? {}, slug)) bad(slug, issue);
   if (!offline && listing.status === "active" && issues.length === before) {
     await verifyArtifact(slug, listing);
   }

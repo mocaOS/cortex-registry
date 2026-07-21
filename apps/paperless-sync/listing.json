@@ -4,7 +4,7 @@
     "name": "Paperless Sync",
     "version": "0.3.1",
     "type": "platform",
-    "description": "Sync your paperless-ngx document archive into the Cortex knowledge graph \u2014 on demand or on a schedule, fully server-side",
+    "description": "Sync your paperless-ngx document archive into the Cortex knowledge graph — on demand or on a schedule, fully server-side",
     "publisher": {
       "name": "reneil",
       "url": "https://github.com/mocaOS"

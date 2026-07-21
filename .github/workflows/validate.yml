@@ -4,6 +4,10 @@ on:
   pull_request:
   push:
     branches: [main]
+  schedule:
+    # Weekly canary: re-download and re-verify every listed artifact so a
+    # deleted or replaced release asset surfaces here, not at install time.
+    - cron: "0 6 * * 1"
 
 jobs:
   validate:
@@ -19,3 +23,5 @@ jobs:
         run: node scripts/validate-listings.mjs
       - name: Check index.json is current
         run: node scripts/build-index.mjs --check
+      - name: Manifest-rule conformance (shared corpus)
+        run: node scripts/conformance.mjs
