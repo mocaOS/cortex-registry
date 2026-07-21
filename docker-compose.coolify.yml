@@ -1,0 +1,45 @@
+# Coolify deploy target — Cortex Registry browse site + JSON API (Next.js).
+#
+# In Coolify: New Resource → Docker Compose (build pack), point it at this repo,
+# set "Docker Compose Location" to /docker-compose.coolify.yml. Coolify builds
+# the image from the Dockerfile, wires up Traefik, and issues TLS.
+#
+# Set the domain for the `registry-site` service in the Coolify UI (e.g.
+# registry.cortex.eco). The SERVICE_FQDN_REGISTRY_4321 var below tells Coolify
+# to route that domain to container port 4321 — without the _4321 suffix Traefik
+# guesses the port and you get a 404/504.
+
+services:
+  registry-site:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # Do NOT publish ports on Coolify — Traefik fronts 80/443 for you.
+    expose:
+      - "4321"
+    environment:
+      # Magic var: Coolify generates the FQDN and proxies it to port 4321.
+      - SERVICE_FQDN_REGISTRY_4321
+      - NODE_ENV=production
+      # Serve the index.json baked into the image (the deployed commit's
+      # catalog). Uncomment to pull the live catalog from GitHub instead:
+      # - REGISTRY_INDEX_URL=https://raw.githubusercontent.com/mocaOS/cortex-registry/main/index.json
+    networks:
+      - default   # inter-service / internal
+      - coolify   # Traefik proxy reaches the container here
+    labels:
+      # Pin the proxy network so Traefik never routes through the wrong one
+      # (the non-deterministic 504 fix).
+      - "traefik.docker.network=coolify"
+    restart: unless-stopped
+    healthcheck:
+      # Exercises loadCatalog() end-to-end; busybox wget ships in the alpine image.
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:4321/api/apps"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+networks:
+  coolify:
+    external: true

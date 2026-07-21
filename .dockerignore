@@ -1,0 +1,11 @@
+# Keep the build context lean and reproducible: never ship local installs or
+# build caches — the image rebuilds node_modules and .next from scratch.
+.git
+.github
+**/node_modules
+**/.next
+**/*.tsbuildinfo
+site/next-env.d.ts
+docker-compose*.yml
+Dockerfile
+.dockerignore
