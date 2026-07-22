@@ -1,0 +1,76 @@
+{
+  "app": {
+    "id": "sharepoint-sync",
+    "name": "SharePoint Sync",
+    "version": "0.1.0",
+    "type": "platform",
+    "description": "Sync SharePoint document libraries into the Cortex knowledge graph — app-only Sites.Selected access, no user sign-in, on demand or on a schedule, fully server-side",
+    "publisher": {
+      "name": "reneil",
+      "url": "https://github.com/mocaOS"
+    },
+    "icon": "icon.svg",
+    "entry": "index.html",
+    "cortex": {
+      "minVersion": "2.1.0",
+      "keyScope": "read_write",
+      "endpoints": [
+        "upload",
+        "documents",
+        "collections"
+      ],
+      "collections": "all"
+    },
+    "config": [
+      {
+        "name": "ENTRA_TENANT_ID",
+        "type": "text",
+        "required": true,
+        "description": "Your Microsoft Entra tenant: the directory (tenant) ID GUID or the tenant domain, e.g. contoso.onmicrosoft.com"
+      },
+      {
+        "name": "ENTRA_CLIENT_ID",
+        "type": "text",
+        "required": true,
+        "description": "Application (client) ID of an Entra app registration with the Sites.Selected APPLICATION permission (admin-consented). The app only sees SharePoint sites explicitly granted to it."
+      },
+      {
+        "name": "ENTRA_CLIENT_SECRET",
+        "type": "secret",
+        "required": true,
+        "auth_header": "Authorization: Bearer ms_graph_token(ENTRA_TENANT_ID, ENTRA_CLIENT_ID, ENTRA_CLIENT_SECRET)",
+        "auth_host": "graph.microsoft.com",
+        "description": "Client secret of the app registration (Certificates & secrets -> New client secret). Cortex mints short-lived app-only Graph tokens from it server-side; the secret is stored encrypted and never leaves the instance."
+      }
+    ],
+    "sharing": {
+      "links": false
+    },
+    "users": false,
+    "capabilities": {
+      "http": {
+        "hosts": [
+          "graph.microsoft.com"
+        ]
+      },
+      "tasks": {},
+      "storage": {}
+    }
+  },
+  "artifact": {
+    "url": "https://github.com/mocaOS/cortex-app-sharepoint/releases/download/v0.1.0/sharepoint-sync-0.1.0.zip",
+    "sha256": "2447b5e3485c5c61e755b498813680dd2b55226fb49926c1cdc44dcedf23c945",
+    "size": 76706
+  },
+  "repo": "https://github.com/mocaOS/cortex-app-sharepoint",
+  "tags": [
+    "sync",
+    "sharepoint",
+    "microsoft",
+    "graph",
+    "documents"
+  ],
+  "screenshots": [],
+  "listedAt": "2026-07-22",
+  "status": "active"
+}

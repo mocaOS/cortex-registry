@@ -283,7 +283,7 @@
       "app": {
         "id": "paperless-sync",
         "name": "Paperless Sync",
-        "version": "0.4.0",
+        "version": "0.4.1",
         "type": "platform",
         "description": "Sync your paperless-ngx document archive into the Cortex knowledge graph — the full original documents, on demand or on a schedule, fully server-side",
         "publisher": {
@@ -332,9 +332,9 @@
         }
       },
       "artifact": {
-        "url": "https://github.com/mocaOS/cortex-app-paperless/releases/download/v0.4.0/paperless-sync-0.4.0.zip",
-        "sha256": "b7964ad2e930c8bb819733f452c62c013611816d36affe0066a05e2f6534d327",
-        "size": 72593
+        "url": "https://github.com/mocaOS/cortex-app-paperless/releases/download/v0.4.1/paperless-sync-0.4.1.zip",
+        "sha256": "6e6f468e3b8daa6df745e6dbf683de3dca8d1f219ba8a075320f176a3a5b1978",
+        "size": 72959
       },
       "repo": "https://github.com/mocaOS/cortex-app-paperless",
       "tags": [
@@ -345,6 +345,83 @@
       ],
       "screenshots": [],
       "listedAt": "2026-07-21",
+      "status": "active"
+    },
+    {
+      "slug": "sharepoint-sync",
+      "app": {
+        "id": "sharepoint-sync",
+        "name": "SharePoint Sync",
+        "version": "0.1.0",
+        "type": "platform",
+        "description": "Sync SharePoint document libraries into the Cortex knowledge graph — app-only Sites.Selected access, no user sign-in, on demand or on a schedule, fully server-side",
+        "publisher": {
+          "name": "reneil",
+          "url": "https://github.com/mocaOS"
+        },
+        "icon": "icon.svg",
+        "entry": "index.html",
+        "cortex": {
+          "minVersion": "2.1.0",
+          "keyScope": "read_write",
+          "endpoints": [
+            "upload",
+            "documents",
+            "collections"
+          ],
+          "collections": "all"
+        },
+        "config": [
+          {
+            "name": "ENTRA_TENANT_ID",
+            "type": "text",
+            "required": true,
+            "description": "Your Microsoft Entra tenant: the directory (tenant) ID GUID or the tenant domain, e.g. contoso.onmicrosoft.com"
+          },
+          {
+            "name": "ENTRA_CLIENT_ID",
+            "type": "text",
+            "required": true,
+            "description": "Application (client) ID of an Entra app registration with the Sites.Selected APPLICATION permission (admin-consented). The app only sees SharePoint sites explicitly granted to it."
+          },
+          {
+            "name": "ENTRA_CLIENT_SECRET",
+            "type": "secret",
+            "required": true,
+            "auth_header": "Authorization: Bearer ms_graph_token(ENTRA_TENANT_ID, ENTRA_CLIENT_ID, ENTRA_CLIENT_SECRET)",
+            "auth_host": "graph.microsoft.com",
+            "description": "Client secret of the app registration (Certificates & secrets -> New client secret). Cortex mints short-lived app-only Graph tokens from it server-side; the secret is stored encrypted and never leaves the instance."
+          }
+        ],
+        "sharing": {
+          "links": false
+        },
+        "users": false,
+        "capabilities": {
+          "http": {
+            "hosts": [
+              "graph.microsoft.com"
+            ]
+          },
+          "tasks": {},
+          "storage": {}
+        }
+      },
+      "artifact": {
+        "url": "https://github.com/mocaOS/cortex-app-sharepoint/releases/download/v0.1.0/sharepoint-sync-0.1.0.zip",
+        "sha256": "2447b5e3485c5c61e755b498813680dd2b55226fb49926c1cdc44dcedf23c945",
+        "size": 76706
+      },
+      "repo": "https://github.com/mocaOS/cortex-app-sharepoint",
+      "tags": [
+        "sync",
+        "sharepoint",
+        "microsoft",
+        "graph",
+        "documents"
+      ],
+      "screenshots": [],
+      "listedAt": "2026-07-22",
       "status": "active"
     },
     {
