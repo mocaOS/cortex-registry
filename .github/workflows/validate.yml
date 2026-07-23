@@ -25,3 +25,17 @@ jobs:
         run: node scripts/build-index.mjs --check
       - name: Manifest-rule conformance (shared corpus)
         run: node scripts/conformance.mjs
+
+  # Separate job so a docs gap never obscures listing-validation results.
+  docs-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Every active listing must appear in the ecosystem's catalog docs
+      # (cortex-app handbook + docs page, cortex-skills apps skill) — merge
+      # the doc updates before or alongside the listing PR.
+      - name: Catalog docs cover every active listing
+        run: node scripts/check-docs-drift.mjs

@@ -74,6 +74,15 @@ your coding agent at [cortexskills.org/builder/app](https://cortexskills.org/bui
    A human reviews what the app declares (key scope, endpoints, external
    hosts, capabilities) before merge.
 
+4. **Update the catalog docs.** CI also checks that every active listing is
+   mentioned in the ecosystem's three catalog docs — cortex-app's
+   [handbook ch. 24](https://github.com/mocaOS/cortex-app/blob/main/handbook/24-apps.md)
+   and [apps docs page](https://github.com/mocaOS/cortex-app/blob/main/documentation/pages/features/apps.mdx),
+   and cortex-skills' [apps skill](https://github.com/mocaOS/cortex-skills/blob/main/public/apps/SKILL.md)
+   — so the registry can't silently outgrow the documentation. Merge those
+   doc PRs before (or alongside) the listing PR; the check reads each repo's
+   `main`.
+
 **New versions:** new tag + new zip + a PR bumping `app.version` and the
 `artifact` block. Never replace the asset under an existing tag — the pinned
 digest is the trust anchor.
@@ -88,6 +97,8 @@ node scripts/validate-listings.mjs            # full check incl. artifact downlo
 node scripts/validate-listings.mjs --offline  # shape/manifest checks only
 node scripts/build-index.mjs --check          # is index.json current?
 node scripts/conformance.mjs                  # manifest rules vs the shared corpus
+node scripts/check-docs-drift.mjs             # catalog docs cover every active listing
+# not-yet-pushed doc edits: CORTEX_APP_DIR=… CORTEX_SKILLS_DIR=… node scripts/check-docs-drift.mjs
 ```
 
 CI runs all of this on every PR **and on a weekly schedule** — so a deleted
