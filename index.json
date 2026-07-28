@@ -520,7 +520,7 @@
       "app": {
         "id": "yt-transcriber",
         "name": "YT Transcriber",
-        "version": "0.1.4",
+        "version": "0.1.5",
         "type": "platform",
         "description": "Turn YouTube videos and whole channels into clean transcripts inside your knowledge graph",
         "publisher": {
@@ -567,9 +567,9 @@
         }
       },
       "artifact": {
-        "url": "https://github.com/mocaOS/cortex-app-youtube-transcriber/releases/download/v0.1.4/yt-transcriber-0.1.4.zip",
-        "sha256": "018386f8aa5b291a08528c00582eb088ef51630da898b14b12516a0096ca58a8",
-        "size": 76234
+        "url": "https://github.com/mocaOS/cortex-app-youtube-transcriber/releases/download/v0.1.5/yt-transcriber-0.1.5.zip",
+        "sha256": "9899d68a758295399f6f3546540c50fb2d9640c33de9f277a431b54659981265",
+        "size": 76193
       },
       "repo": "https://github.com/mocaOS/cortex-app-youtube-transcriber",
       "tags": [
