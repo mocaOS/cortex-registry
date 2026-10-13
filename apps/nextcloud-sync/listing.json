@@ -2,7 +2,7 @@
   "app": {
     "id": "nextcloud-sync",
     "name": "Nextcloud Sync",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "type": "platform",
     "description": "Sync selected Nextcloud folders into the Cortex knowledge graph — on demand or on a schedule, fully server-side via WebDAV",
     "publisher": {
@@ -57,9 +57,9 @@
     }
   },
   "artifact": {
-    "url": "https://github.com/mocaOS/cortex-app-nextcloud/releases/download/v0.1.0/nextcloud-sync-0.1.0.zip",
-    "sha256": "05a737e98f6b2a38faa10f4621ff61a729fa0337042982db55b114a4d2aa75d5",
-    "size": 75436
+    "url": "https://github.com/mocaOS/cortex-app-nextcloud/releases/download/v0.2.0/nextcloud-sync-0.2.0.zip",
+    "sha256": "ec7d925f4fbe07c01d57bbd26741a48869767e181c43880e95899ff950ec23d3",
+    "size": 75488
   },
   "repo": "https://github.com/mocaOS/cortex-app-nextcloud",
   "tags": [

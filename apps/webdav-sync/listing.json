@@ -2,7 +2,7 @@
   "app": {
     "id": "webdav-sync",
     "name": "WebDAV Sync",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "type": "platform",
     "description": "Sync folders from any WebDAV server into the Cortex knowledge graph — Nextcloud, Synology, Koofr, pCloud, GMX/WEB.DE, MagentaCLOUD, HiDrive & more — on demand or scheduled, fully server-side",
     "publisher": {
@@ -57,9 +57,9 @@
     }
   },
   "artifact": {
-    "url": "https://github.com/mocaOS/cortex-app-webdav/releases/download/v0.1.1/webdav-sync-0.1.1.zip",
-    "sha256": "999782b55b45e8dfad5a88e59e71625a3814503fb04cabf4a777497b6307bfa6",
-    "size": 76168
+    "url": "https://github.com/mocaOS/cortex-app-webdav/releases/download/v0.2.0/webdav-sync-0.2.0.zip",
+    "sha256": "0163de4db90c1d8d73d2ee2cecf11098a82c3a790cf51d6bbcd9a862930d2989",
+    "size": 76245
   },
   "repo": "https://github.com/mocaOS/cortex-app-webdav",
   "tags": [

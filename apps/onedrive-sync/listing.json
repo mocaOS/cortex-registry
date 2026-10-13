@@ -2,7 +2,7 @@
   "app": {
     "id": "onedrive-sync",
     "name": "OneDrive Sync",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "type": "platform",
     "description": "Sync selected OneDrive folders into the Cortex knowledge graph — on demand or on a schedule, fully server-side via Microsoft Graph delta",
     "publisher": {
@@ -48,9 +48,9 @@
     }
   },
   "artifact": {
-    "url": "https://github.com/mocaOS/cortex-app-onedrive/releases/download/v0.1.0/onedrive-sync-0.1.0.zip",
-    "sha256": "db13a6140dadc7512dd77a3f3d1c49d4f4ba7e0d212781aab7f6fabc6ddbd457",
-    "size": 76928
+    "url": "https://github.com/mocaOS/cortex-app-onedrive/releases/download/v0.2.0/onedrive-sync-0.2.0.zip",
+    "sha256": "bb8adc3728847a4669eb7783b697df4ef812712662342709c84c4e2c23614b2a",
+    "size": 76985
   },
   "repo": "https://github.com/mocaOS/cortex-app-onedrive",
   "tags": [

@@ -2,7 +2,7 @@
   "app": {
     "id": "dropbox-sync",
     "name": "Dropbox Sync",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "type": "platform",
     "description": "Sync selected Dropbox folders into the Cortex knowledge graph — on demand or on a schedule, fully server-side with OAuth PKCE",
     "publisher": {
@@ -48,9 +48,9 @@
     }
   },
   "artifact": {
-    "url": "https://github.com/mocaOS/cortex-app-dropbox/releases/download/v0.1.0/dropbox-sync-0.1.0.zip",
-    "sha256": "acc6bde9b67ad48110624b26ef3134af7ebe1076eb4b988f18e75c970f56d0c0",
-    "size": 76854
+    "url": "https://github.com/mocaOS/cortex-app-dropbox/releases/download/v0.2.0/dropbox-sync-0.2.0.zip",
+    "sha256": "6d85123c09185abfff65227eb7acc6866c9b7b7a77be98b54f1a2f0ff61c197b",
+    "size": 76924
   },
   "repo": "https://github.com/mocaOS/cortex-app-dropbox",
   "tags": [

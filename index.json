@@ -7,7 +7,7 @@
       "app": {
         "id": "dropbox-sync",
         "name": "Dropbox Sync",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "type": "platform",
         "description": "Sync selected Dropbox folders into the Cortex knowledge graph — on demand or on a schedule, fully server-side with OAuth PKCE",
         "publisher": {
@@ -53,9 +53,9 @@
         }
       },
       "artifact": {
-        "url": "https://github.com/mocaOS/cortex-app-dropbox/releases/download/v0.1.0/dropbox-sync-0.1.0.zip",
-        "sha256": "acc6bde9b67ad48110624b26ef3134af7ebe1076eb4b988f18e75c970f56d0c0",
-        "size": 76854
+        "url": "https://github.com/mocaOS/cortex-app-dropbox/releases/download/v0.2.0/dropbox-sync-0.2.0.zip",
+        "sha256": "6d85123c09185abfff65227eb7acc6866c9b7b7a77be98b54f1a2f0ff61c197b",
+        "size": 76924
       },
       "repo": "https://github.com/mocaOS/cortex-app-dropbox",
       "tags": [
@@ -73,7 +73,7 @@
       "app": {
         "id": "gdrive-sync",
         "name": "Google Drive Sync",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "type": "platform",
         "description": "Sync Google Drive folders into the Cortex knowledge graph — share folders with a service account, no OAuth consent screens, on demand or on a schedule, fully server-side",
         "publisher": {
@@ -122,9 +122,9 @@
         }
       },
       "artifact": {
-        "url": "https://github.com/mocaOS/cortex-app-gdrive/releases/download/v0.1.0/gdrive-sync-0.1.0.zip",
-        "sha256": "70495a0462751a3eee58e67ebabc7c32f413cc85bd40e4250ca7a31d9b813387",
-        "size": 75815
+        "url": "https://github.com/mocaOS/cortex-app-gdrive/releases/download/v0.2.0/gdrive-sync-0.2.0.zip",
+        "sha256": "890cdda3ed2e3df2e8f8582884a19a4be5e89bdfb7a68f8d3e04a3ce563c4313",
+        "size": 75891
       },
       "repo": "https://github.com/mocaOS/cortex-app-gdrive",
       "tags": [
@@ -142,7 +142,7 @@
       "app": {
         "id": "nextcloud-sync",
         "name": "Nextcloud Sync",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "type": "platform",
         "description": "Sync selected Nextcloud folders into the Cortex knowledge graph — on demand or on a schedule, fully server-side via WebDAV",
         "publisher": {
@@ -197,9 +197,9 @@
         }
       },
       "artifact": {
-        "url": "https://github.com/mocaOS/cortex-app-nextcloud/releases/download/v0.1.0/nextcloud-sync-0.1.0.zip",
-        "sha256": "05a737e98f6b2a38faa10f4621ff61a729fa0337042982db55b114a4d2aa75d5",
-        "size": 75436
+        "url": "https://github.com/mocaOS/cortex-app-nextcloud/releases/download/v0.2.0/nextcloud-sync-0.2.0.zip",
+        "sha256": "ec7d925f4fbe07c01d57bbd26741a48869767e181c43880e95899ff950ec23d3",
+        "size": 75488
       },
       "repo": "https://github.com/mocaOS/cortex-app-nextcloud",
       "tags": [
@@ -217,7 +217,7 @@
       "app": {
         "id": "onedrive-sync",
         "name": "OneDrive Sync",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "type": "platform",
         "description": "Sync selected OneDrive folders into the Cortex knowledge graph — on demand or on a schedule, fully server-side via Microsoft Graph delta",
         "publisher": {
@@ -263,9 +263,9 @@
         }
       },
       "artifact": {
-        "url": "https://github.com/mocaOS/cortex-app-onedrive/releases/download/v0.1.0/onedrive-sync-0.1.0.zip",
-        "sha256": "db13a6140dadc7512dd77a3f3d1c49d4f4ba7e0d212781aab7f6fabc6ddbd457",
-        "size": 76928
+        "url": "https://github.com/mocaOS/cortex-app-onedrive/releases/download/v0.2.0/onedrive-sync-0.2.0.zip",
+        "sha256": "bb8adc3728847a4669eb7783b697df4ef812712662342709c84c4e2c23614b2a",
+        "size": 76985
       },
       "repo": "https://github.com/mocaOS/cortex-app-onedrive",
       "tags": [
@@ -283,7 +283,7 @@
       "app": {
         "id": "paperless-sync",
         "name": "Paperless Sync",
-        "version": "0.4.3",
+        "version": "0.5.0",
         "type": "platform",
         "description": "Sync your paperless-ngx document archive into the Cortex knowledge graph — the full original documents, on demand or on a schedule, fully server-side",
         "publisher": {
@@ -332,9 +332,9 @@
         }
       },
       "artifact": {
-        "url": "https://github.com/mocaOS/cortex-app-paperless/releases/download/v0.4.3/paperless-sync-0.4.3.zip",
-        "sha256": "e9770a6024b52ec22a9d7bca4cdf7700cb224c2bcbae151cd3c2f90c16da4609",
-        "size": 73534
+        "url": "https://github.com/mocaOS/cortex-app-paperless/releases/download/v0.5.0/paperless-sync-0.5.0.zip",
+        "sha256": "75533daf913fac92dfa930635111a6b0b820c1a15f4a43f3a799abaa346e3f21",
+        "size": 73860
       },
       "repo": "https://github.com/mocaOS/cortex-app-paperless",
       "tags": [
@@ -352,7 +352,7 @@
       "app": {
         "id": "sharepoint-sync",
         "name": "SharePoint Sync",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "type": "platform",
         "description": "Sync SharePoint document libraries into the Cortex knowledge graph — app-only Sites.Selected access, no user sign-in, on demand or on a schedule, fully server-side",
         "publisher": {
@@ -408,9 +408,9 @@
         }
       },
       "artifact": {
-        "url": "https://github.com/mocaOS/cortex-app-sharepoint/releases/download/v0.1.0/sharepoint-sync-0.1.0.zip",
-        "sha256": "2447b5e3485c5c61e755b498813680dd2b55226fb49926c1cdc44dcedf23c945",
-        "size": 76706
+        "url": "https://github.com/mocaOS/cortex-app-sharepoint/releases/download/v0.2.0/sharepoint-sync-0.2.0.zip",
+        "sha256": "db3024da30d025bb3600fa4b1042bc508c2a8f61b8626d659baa73646e8bd763",
+        "size": 76773
       },
       "repo": "https://github.com/mocaOS/cortex-app-sharepoint",
       "tags": [
@@ -429,7 +429,7 @@
       "app": {
         "id": "webdav-sync",
         "name": "WebDAV Sync",
-        "version": "0.1.1",
+        "version": "0.2.0",
         "type": "platform",
         "description": "Sync folders from any WebDAV server into the Cortex knowledge graph — Nextcloud, Synology, Koofr, pCloud, GMX/WEB.DE, MagentaCLOUD, HiDrive & more — on demand or scheduled, fully server-side",
         "publisher": {
@@ -484,9 +484,9 @@
         }
       },
       "artifact": {
-        "url": "https://github.com/mocaOS/cortex-app-webdav/releases/download/v0.1.1/webdav-sync-0.1.1.zip",
-        "sha256": "999782b55b45e8dfad5a88e59e71625a3814503fb04cabf4a777497b6307bfa6",
-        "size": 76168
+        "url": "https://github.com/mocaOS/cortex-app-webdav/releases/download/v0.2.0/webdav-sync-0.2.0.zip",
+        "sha256": "0163de4db90c1d8d73d2ee2cecf11098a82c3a790cf51d6bbcd9a862930d2989",
+        "size": 76245
       },
       "repo": "https://github.com/mocaOS/cortex-app-webdav",
       "tags": [
