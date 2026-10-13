@@ -2,7 +2,7 @@
   "app": {
     "id": "paperless-sync",
     "name": "Paperless Sync",
-    "version": "0.4.3",
+    "version": "0.5.0",
     "type": "platform",
     "description": "Sync your paperless-ngx document archive into the Cortex knowledge graph — the full original documents, on demand or on a schedule, fully server-side",
     "publisher": {
@@ -51,9 +51,9 @@
     }
   },
   "artifact": {
-    "url": "https://github.com/mocaOS/cortex-app-paperless/releases/download/v0.4.3/paperless-sync-0.4.3.zip",
-    "sha256": "e9770a6024b52ec22a9d7bca4cdf7700cb224c2bcbae151cd3c2f90c16da4609",
-    "size": 73534
+    "url": "https://github.com/mocaOS/cortex-app-paperless/releases/download/v0.5.0/paperless-sync-0.5.0.zip",
+    "sha256": "75533daf913fac92dfa930635111a6b0b820c1a15f4a43f3a799abaa346e3f21",
+    "size": 73860
   },
   "repo": "https://github.com/mocaOS/cortex-app-paperless",
   "tags": [

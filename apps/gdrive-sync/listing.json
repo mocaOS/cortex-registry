@@ -2,7 +2,7 @@
   "app": {
     "id": "gdrive-sync",
     "name": "Google Drive Sync",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "type": "platform",
     "description": "Sync Google Drive folders into the Cortex knowledge graph — share folders with a service account, no OAuth consent screens, on demand or on a schedule, fully server-side",
     "publisher": {
@@ -51,9 +51,9 @@
     }
   },
   "artifact": {
-    "url": "https://github.com/mocaOS/cortex-app-gdrive/releases/download/v0.1.0/gdrive-sync-0.1.0.zip",
-    "sha256": "70495a0462751a3eee58e67ebabc7c32f413cc85bd40e4250ca7a31d9b813387",
-    "size": 75815
+    "url": "https://github.com/mocaOS/cortex-app-gdrive/releases/download/v0.2.0/gdrive-sync-0.2.0.zip",
+    "sha256": "890cdda3ed2e3df2e8f8582884a19a4be5e89bdfb7a68f8d3e04a3ce563c4313",
+    "size": 75891
   },
   "repo": "https://github.com/mocaOS/cortex-app-gdrive",
   "tags": [

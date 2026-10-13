@@ -2,7 +2,7 @@
   "app": {
     "id": "sharepoint-sync",
     "name": "SharePoint Sync",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "type": "platform",
     "description": "Sync SharePoint document libraries into the Cortex knowledge graph — app-only Sites.Selected access, no user sign-in, on demand or on a schedule, fully server-side",
     "publisher": {
@@ -58,9 +58,9 @@
     }
   },
   "artifact": {
-    "url": "https://github.com/mocaOS/cortex-app-sharepoint/releases/download/v0.1.0/sharepoint-sync-0.1.0.zip",
-    "sha256": "2447b5e3485c5c61e755b498813680dd2b55226fb49926c1cdc44dcedf23c945",
-    "size": 76706
+    "url": "https://github.com/mocaOS/cortex-app-sharepoint/releases/download/v0.2.0/sharepoint-sync-0.2.0.zip",
+    "sha256": "db3024da30d025bb3600fa4b1042bc508c2a8f61b8626d659baa73646e8bd763",
+    "size": 76773
   },
   "repo": "https://github.com/mocaOS/cortex-app-sharepoint",
   "tags": [
